@@ -1,0 +1,10 @@
+.profile__info-edit {
+  display: flex;
+}
+
+@media screen and (min-width:900px){
+  .profile__info-edit {
+    justify-content: space-between;
+  }
+
+}
