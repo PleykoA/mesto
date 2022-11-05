@@ -4,6 +4,7 @@
   margin: 36.25px auto 50px;
   display: flex;
   justify-content: space-between;
+  text-overflow: ellipsis;
 }
 
 @media screen and (max-width:645px) {

@@ -5,11 +5,9 @@
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
-  position: absolute;
-  right: 20px;
-  bottom: 34px;
   border: 0;
   cursor: pointer;
+  margin-right: 30px;
 }
 
 .element__like[aria-pressed=true] {
@@ -18,5 +16,5 @@
 }
 
 .element__like:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }

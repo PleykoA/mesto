@@ -11,16 +11,7 @@
   z-index: 2;
 }
 
-.popup:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #000000;
-  opacity: .5;
-}
-
-.popup.opened {
+.popup_opened {
   visibility: visible;
   background: rgba(0, 0, 0, .5);
 }
