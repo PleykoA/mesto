@@ -5,6 +5,10 @@ let editButton = document.querySelector('.profile__edit-button');
 let nameInfo = document.querySelector('.profile__title');
 let jobInfo = document.querySelector('.profile__subtitle');
 let formElement = document.querySelector('.popup__edit');
+//форма в DOM
+let nameInput = document.querySelector('.popup__input_name');
+let jobInput = document.querySelector('.popup__input_info');
+
 
 
 /*doc.addEventListener("click", ({ target }) => {
@@ -19,17 +23,15 @@ let formElement = document.querySelector('.popup__edit');
 
 editButton.addEventListener('click', function () {
   popUp.classList.add('popup_opened');
+  nameInput.value = nameInfo.textContent;
+  jobInput.value = jobInfo.textContent;
 })
 
 function closePopUp () {
   popUp.classList.remove('popup_opened');
 };
 
-//форма в DOM
-let nameInput = document.querySelector('.popup__input-name');
-let jobInput = document.querySelector('.popup__input-info');
 
-//поля формы в DOM
 
 /*//попап закроется по клику по бэкграунду
 popUp.addEventListener('click', function (event) {
@@ -40,8 +42,8 @@ popUp.addEventListener('click', function (event) {
 
 
 
-function formSubmitHandler(evt) {
-  evt.preventDefault();
+function formSubmitHandler(closePopUp) {
+  closePopUp .preventDefault();
 
   nameInfo.textContent = nameInput.value;
   jobInfo.textContent = jobInput.value;

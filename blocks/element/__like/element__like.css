@@ -18,3 +18,10 @@
 .element__like:hover {
   opacity: 0.5;
 }
+
+@media screen and (max-width:500px) {
+  .element__like {
+    margin-right: 20px;
+    margin-bottom: 4px;
+  }
+}

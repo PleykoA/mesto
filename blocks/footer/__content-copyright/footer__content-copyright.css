@@ -6,3 +6,10 @@
   font-style: normal;
   margin: 0;
 }
+
+@media screen and (max-width: 425px) {
+  .footer__content-copyright {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
