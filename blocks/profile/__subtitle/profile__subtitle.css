@@ -4,12 +4,12 @@
   font-style: normal;
   font-size: 18px;
   line-height: 22px;
-  margin-top: 16px;
   text-overflow: ellipsis;
   max-width: 336px;
   overflow: hidden;
   white-space: nowrap;
   margin: 0;
+  padding-bottom: 5px;
 }
 
 @media screen and (max-width: 645px) {
@@ -18,5 +18,6 @@
     font-size: 14px;
     line-height: 17px;
     margin-bottom: 0;
+    padding: 0;
   }
 }

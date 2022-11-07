@@ -11,10 +11,3 @@
   }
 
 }
-
-@media screen and (max-width:425px) {
-  .profile__info-edit {
-    max-width: 300px;
-  }
-
-}
