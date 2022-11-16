@@ -1,12 +1,13 @@
-.element {
+.card {
   background-color: white;
   border-radius: 10px;
   position: relative;
+  max-width: 282px;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 879px) {
-  .element {
-    max-width: 282px;
+  .card {
     margin: 0 auto;
   }
 

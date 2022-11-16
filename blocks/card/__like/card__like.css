@@ -1,4 +1,4 @@
-.element__like {
+.card__like {
   width: 22px;
   height: 19px;
   background-image: url(../../../images/like.svg);
@@ -11,17 +11,17 @@
   margin-bottom: 4px;
 }
 
-.element__like[aria-pressed=true] {
+.card__like[aria-pressed=true] {
   opacity: 1;
   background-image: url(../../../images/like-active.svg);
 }
 
-.element__like:hover {
+.card__like:hover {
   opacity: 0.5;
 }
 
 @media screen and (max-width:500px) {
-  .element__like {
+  .card__like {
     margin-right: 20px;
   }
 }

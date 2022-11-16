@@ -1,0 +1,10 @@
+.card__delite_button-head {
+  position: absolute;
+  bottom: 18px;
+  right: 0px;
+}
+
+.card__delite_button-head.active {
+  transform: translateY(-5px) rotate(-20deg);
+}
+
