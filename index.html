@@ -26,20 +26,19 @@
       </div>
       <button class="profile__add-button" type="button"></button>
     </section>
-    <div class="elements">
-      <template id="cards-template">
-        <div class="card">
-        <img class="card__image">
-        <button class="card__delite" type="button">
-          <img src="./images/delitebtnhead.svg" class="card__delite_button-head" alt="крышка корзины">
-          <img src="./images/delitebtnfooter.svg" class="card__delite_button-footer" alt="корзина">
-        </button>
-        <div class="card__container">
-          <h2 class="card__title"></h2>
-          <button class="card__like" type="button"></button>
-        </div>
-        </div>
-      </template>
+    <div class="cards">
+      <ul class="cards__item">
+        <template id="card-template">
+          <li class="card">
+            <img class="card__image" alt="#" src="#">
+            <button class="card__delete" type="button"></button>
+            <div class="card__container">
+              <h2 class="card__title"></h2>
+              <button class="card__like" type="button"></button>
+            </div>
+          </li>
+        </template>
+      </ul>
 
 
       <!--<article class="element">
@@ -90,7 +89,7 @@
   <footer class="footer">
     <p class="footer__content-copyright">&#169; 2020 Mesto Russia</p>
   </footer>
-  <div class="popup popup-edite">
+  <div class="popup popup_edite">
     <div class="popup__container">
       <h2 class="popup__header">Редактировать профиль</h2>
       <form class="popup__edit" name="popup-edit">
@@ -98,36 +97,31 @@
           <input class="popup__input popup__input_item_name" type="text" name="Name" placeholder="Имя">
           <input class="popup__input popup__input_item_job" type="text" name="Job" placeholder="О себе">
         </fieldset>
-        <button class="popup__save-button" type="submit">Сохранить</button>
+        <button class="popup__save-button" type="submit" id="submit">Сохранить</button>
       </form>
       <button class="popup__close-button" type="button"></button>
     </div>
   </div>
-
-  <div class="popup popup-add">
+  <div class="popup popup_add">
     <div class="popup__container">
       <h2 class="popup__header">Новое место</h2>
-      <form class="popup__edit" name="popup-edit">
+      <form class="popup__edit-place" name="popup-edit-place">
         <fieldset class="popup__fieldset">
-          <input class="popup__input popup__input_item_place" type="text" name="Place" placeholder="Название">
-          <input class="popup__input popup__input_item_link" type="Url" name="Link" placeholder="Ссылка на картинку">
+          <input class="popup__input popup__input_item_place" type="text" name="place" placeholder="Название">
+          <input class="popup__input popup__input_item_link" type="url" name="link" placeholder="Ссылка на картинку">
         </fieldset>
         <button class="popup__save-button" type="submit">Создать</button>
       </form>
-      <button class="popup__close-button add" type="button"></button>
+      <button class="popup__close-button" type="button"></button>
     </div>
   </div>
-
-  <div class="popup popup-image">
-    <div class="popup__container popup__container-image">
-      <figure class="picture">
-        <img class="picture__image" alt="" src="">
-        <figcaption class="picture__caption"></figcaption>
-      </figure>
-      <button class="popup__close-button" type="button"></button>
+  <div class="popup popup_image">
+    <figure class="picture">
+      <button class="popup__close-button-image" type="button"></button>
+      <img class="popup__image" alt="" src="#">
+      <figcaption class="popup__caption"></figcaption>
+    </figure>
   </div>
-  </div>
-
   <script src="./scripts/index.js"></script>
 </body>
 

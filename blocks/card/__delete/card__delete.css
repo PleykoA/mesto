@@ -1,7 +1,7 @@
-.card__delite {
-  /*background-image: url(../../../images/delite.svg);
+.card__delete {
+  background-image: url(../../../images/delete-btn.svg);
   background-repeat: no-repeat;
-  background-position: center;*/
+  background-position: center;
   border: 0;
   cursor: pointer;
   width: 18px;
@@ -13,6 +13,6 @@
   padding: 0;
 }
 
-.card__delite:hover {
+.card__delete:hover {
   opacity: 0.5;
 }
