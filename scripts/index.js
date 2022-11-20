@@ -125,7 +125,7 @@ function generateCard(cardItem, cardLink, cardName) {
   const cardImg = cardItem.querySelector('.card__image');
   const cardTitle = cardItem.querySelector('.card__title');
   cardImg.setAttribute('src', cardLink);
-  cardImg.setAttribute('alt', `${cardName}`);
+  cardImg.setAttribute('alt', cardName);
   cardTitle.textContent = cardName;
 
   //удаление карточки
