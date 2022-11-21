@@ -11,7 +11,7 @@
   margin-bottom: 4px;
 }
 
-.card__like[aria-pressed=true] {
+.card__like.active {
   opacity: 1;
   background-image: url(../../../images/like-active.svg);
 }

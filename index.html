@@ -28,62 +28,8 @@
     </section>
     <div class="cards">
       <ul class="cards__item">
-        <template id="card-template">
-          <li class="card">
-            <img class="card__image" alt="#" src="#">
-            <button class="card__delete" type="button"></button>
-            <div class="card__container">
-              <h2 class="card__title"></h2>
-              <button class="card__like" type="button"></button>
-            </div>
-          </li>
-        </template>
+
       </ul>
-
-
-      <!--<article class="element">
-        <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
-        <div class="element__container">
-          <h2 class="element__title">Карачаевск</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/elbrus.jpg" alt="ГораЭльбрус">
-        <div class="element__container">
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
-        <div class="element__container">
-          <h2 class="element__title">Домбай</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
-      <article class="element"> <img class="element__image" src="./images/elbrus.jpg" alt="Эльбрус">
-        <div class="element__container">
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
-        <div class="element__container">
-          <h2 class="element__title">Домбай</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
-        <div class="element__container">
-          <h2 class="element__title">Карачаево-Черкесия</h2>
-          <button class="element__like" type="button"></button>
-        </div>
-      </article> -->
-
-
     </div>
   </main>
   <footer class="footer">
@@ -122,7 +68,17 @@
       <figcaption class="popup__caption"></figcaption>
     </figure>
   </div>
-  <script src="./scripts/index.js"></script>
+  <template id="card-template">
+    <li class="card">
+      <img class="card__image" alt="#" src="#">
+      <button class="card__delete" type="button"></button>
+      <div class="card__container">
+        <h2 class="card__title"></h2>
+        <button class="card__like" type="button"></button>
+      </div>
+    </li>
+  </template>
+  <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
