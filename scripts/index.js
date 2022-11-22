@@ -19,10 +19,8 @@ const cardsItems = document.querySelector('.cards__item');
 const popupOpenedImage = document.querySelector('.popup__image');
 const popupImageCaption = document.querySelector('.popup__caption');
 
-
 const popupLinkInput = document.querySelector('.popup__input_item_link');
 const popupPlaceInput = document.querySelector('.popup__input_item_place');
-
 
 const cardTemplate = document.querySelector('#card-template').content;
 
@@ -53,11 +51,11 @@ profileAddButton.addEventListener('click', () => {
 });
 
 //закрытие попапов//
-const popupCloseBtn = document.querySelectorAll('.popup__close-button');
+const popupCloseBtns = document.querySelectorAll('.popup__close-button');
 
-popupCloseBtn.forEach((closeBtn) => {
-  const popup = closeBtn.closest('.popup');
-  closeBtn.addEventListener('click', () => closePopup(popup));
+popupCloseBtns.forEach((closeBtns) => {
+  const popup = closeBtns.closest('.popup');
+  closeBtns.addEventListener('click', () => closePopup(popup));
 })
 
 
@@ -95,7 +93,7 @@ function createCard(cardLink, cardName) {
   //удаление карточки
   const deleteCardButton = card.querySelector('.card__delete');
   deleteCardButton.addEventListener('click', () => {
-    deleteCardButton.closest('li').remove()
+    deleteCardButton.closest('.card').remove()
   }
   );
 
@@ -114,12 +112,6 @@ function addCard(card) {
   cardsItems.prepend(card);
 };
 
-
-//закрытие попапа с картинкой//
-const popupImgCloseBtn = document.querySelector('.popup__close-button-image')
-popupImgCloseBtn.addEventListener('click', () => {
-  closePopup(popupImage);
-});
 
 //добавление карточек из массива
 initialCards.forEach((initialCard) => {
