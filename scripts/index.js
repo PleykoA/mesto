@@ -8,10 +8,10 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__title');
 const profileInfo = document.querySelector('.profile__subtitle');
 
-const formElement = document.querySelector('.popup__edit');
-const formPlace = document.querySelector('.popup__edit-place');
-const popupNameInput = document.querySelector('.popup__input_item_name');
-const popupInfoInput = document.querySelector('.popup__input_item_job');
+const formElement = document.querySelector('.form_type_edit');
+const formPlace = document.querySelector('.form__edit_place');
+const popupNameInput = document.querySelector('.form__input_item_name');
+const popupInfoInput = document.querySelector('.form__input_item_job');
 const profileAddButton = document.querySelector('.profile__add-button');
 
 const cardsItems = document.querySelector('.cards__item');
@@ -19,11 +19,18 @@ const cardsItems = document.querySelector('.cards__item');
 const popupOpenedImage = document.querySelector('.popup__image');
 const popupImageCaption = document.querySelector('.popup__caption');
 
-const popupLinkInput = document.querySelector('.popup__input_item_link');
-const popupPlaceInput = document.querySelector('.popup__input_item_place');
+const popupLinkInput = document.querySelector('.form__input_item_link');
+const popupPlaceInput = document.querySelector('.form__input_item_place');
 
 const cardTemplate = document.querySelector('#card-template').content;
 
+//закрытие попапа эскейпом
+function handlePopupEsc(event) {
+  if (event.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+}
 //добавление лайка//
 const likedCard = (event) => {
   event.target.closest('.card__like').classList.toggle('active');
@@ -32,10 +39,12 @@ const likedCard = (event) => {
 //открытие попапов
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handlePopupEsc);
 }
-
+//закрытие попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.addEventListener('keydown', handlePopupEsc);
 }
 
 //кнопка открытия попапа редактирования профиля
@@ -56,16 +65,18 @@ const popupCloseBtns = document.querySelectorAll('.popup__close-button');
 popupCloseBtns.forEach((closeBtns) => {
   const popup = closeBtns.closest('.popup');
   closeBtns.addEventListener('click', () => closePopup(popup));
-})
+});
 
+//попап закроется кликом по бэкграунду
+const popupOverlay = document.querySelectorAll('.popup');
 
-//попап закроется по клику по бэкграунду
-/*popUp.addEventListener('click', function (event) {
-  if (event.target === event.currentTarget) {
-    popUp.classList.remove('popup_opened');
-  }
-});*/
-
+popupOverlay.forEach((popup) => {
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+      closePopup(popup);
+    }
+  })
+});
 
 //Вставка инфы из попапа в профиль//
 function submitEditProfileForm(evt) {
@@ -130,5 +141,7 @@ function submitPlaceForm(e) {
 };
 
 
+
 formPlace.addEventListener('submit', submitPlaceForm);
 formElement.addEventListener('submit', submitEditProfileForm);
+
