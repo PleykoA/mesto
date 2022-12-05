@@ -4,7 +4,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  margin: 0 36px 43px;
+  margin: 30px 0 0;
   width: 358px;
   padding-bottom: 13px;
   font-style: normal;
@@ -20,8 +20,7 @@
 @media screen and (max-width:425px) {
   .form__input {
     width: 238px;
-    margin-bottom: 30px;
-    margin-left: 22px;
-    margin-right: 22px;
+    margin:0;
+    padding:0;
   }
 }

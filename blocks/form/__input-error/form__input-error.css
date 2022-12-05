@@ -3,11 +3,18 @@
   font-weight: 400;
   font-size: 12px;
   text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
-  width: 100%;
   line-height: 15px;
   color: #FF0000;
   visibility: hidden;
-  min-height: 30px;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+@media screen and (max-width:425px) {
+  .form__input-error {
+    width: 238px;
+    margin-right: 22px;
+  }
 }

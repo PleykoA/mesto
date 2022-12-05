@@ -3,7 +3,7 @@
   font-size: 24px;
   font-style: normal;
   line-height: 29px;
-  margin: 34px 87px 54px 36px;
+  margin: 34px 87px 24px 36px;
   max-width: 330px;
 }
 
@@ -11,7 +11,7 @@
   .popup__header {
     font-size: 18px;
     line-height: 22px;
-    margin: 25px 22px 75px;
+    margin: 25px 22px 24px;
     max-width: 238px;
   }
 }
