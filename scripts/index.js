@@ -9,7 +9,7 @@ const profileName = document.querySelector('.profile__title');
 const profileInfo = document.querySelector('.profile__subtitle');
 
 const formElement = document.querySelector('.form_type_edit');
-const formPlace = document.querySelector('.form__edit_place');
+const formPlace = document.querySelector('.form_edit_place');
 const popupNameInput = document.querySelector('.form__input_item_name');
 const popupInfoInput = document.querySelector('.form__input_item_job');
 const profileAddButton = document.querySelector('.profile__add-button');
