@@ -1,5 +1,5 @@
 import { initialCards } from "./constants.js";
-import { enableValidation, hideInputError } from './validate.js';
+
 const popupEditProfile = document.querySelector('.popup_edite');
 const popupAddPlace = document.querySelector('.popup_add');
 const popupImage = document.querySelector('.popup_image');
@@ -31,21 +31,10 @@ function handlePopupEsc(event) {
     closePopup(popupOpened);
   }
 }
+
 //добавление лайка//
 const likedCard = (event) => {
   event.target.closest('.card__like').classList.toggle('active');
-}
-
-function resetError(form) {
-  const formInputs = form.querySelectorAll('.form__input');
-  formInputs.forEach((formInput) => {
-    hideInputError(form, formInput, enableValidation);
-  });
-}
-
-function addProfileInfoIntoForm() {
-  popupNameInput.value = profileName.textContent;
-  popupInfoInput.value = profileInfo.textContent;
 }
 
 //открытие попапов
@@ -53,28 +42,22 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handlePopupEsc);
 }
+
 //закрытие попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.addEventListener('keydown', handlePopupEsc);
 }
 
-
 //кнопка открытия попапа редактирования профиля
 profileEditButton.addEventListener('click', () => {
   popupNameInput.value = profileName.textContent;
   popupInfoInput.value = profileInfo.textContent;
-  addProfileInfoIntoForm.disabled = true;
-  resetError(popupEditProfile);
   openPopup(popupEditProfile);
 });
 
 //кнопка открытия попапа добавления места
-const formPlaceBtn = formPlace.querySelector('.form__save-button');
 profileAddButton.addEventListener('click', () => {
-  formPlaceBtn.disabled = true;
-  formPlace.reset();
-  resetError(popupAddPlace);
   openPopup(popupAddPlace);
 });
 

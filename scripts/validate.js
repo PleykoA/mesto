@@ -17,12 +17,13 @@ const showInputError = (formElement, inputElement, errorMessage, settings) => {
 };
 
 
-export const hideInputError = (formElement, inputElement, settings) => {
+const hideInputError = (formElement, inputElement, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(settings.inputErrorClass);
   errorElement.classList.remove(settings.errorClass);
   errorElement.textContent = '';
 };
+
 
 
 const hasInvalidInput = (inputList) => {
@@ -32,20 +33,20 @@ const hasInvalidInput = (inputList) => {
 };
 
 
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.disabled = true;
-  } else {
-    buttonElement.disabled = false;
-  }
-};
-
-
 const checkInputValidity = (formElement, inputElement, settings) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, settings);
   } else {
     hideInputError(formElement, inputElement, settings);
+  }
+};
+
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
+  } else {
+    buttonElement.disabled = false;
   }
 };
 
@@ -61,11 +62,17 @@ const setEventListeners = (formElement, settings) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(formElement, inputElement, settings);
       toggleButtonState(inputList, buttonElement);
+      formElement.addEventListener('reset', () => {
+        setTimeout(() => {
+          toggleButtonState(inputList, buttonElement, validation);
+        });
+      });
     });
   });
 };
 
-export function enableValidation(settings) {
+
+function enableValidation(settings) {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach((formElement) => {
     setEventListeners(formElement, settings);
@@ -73,3 +80,6 @@ export function enableValidation(settings) {
 };
 
 enableValidation(validation);
+
+
+//Большое спасибо за ревью! С: //
