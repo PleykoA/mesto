@@ -1,4 +1,6 @@
-import { initialCards } from "./constants.js";
+import { initialCards, settings } from './constants.js';
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
 
 const popupEditProfile = document.querySelector('.popup_edite');
 const popupAddPlace = document.querySelector('.popup_add');
@@ -22,7 +24,9 @@ const popupImageCaption = document.querySelector('.popup__caption');
 const popupLinkInput = document.querySelector('.form__input_item_link');
 const popupPlaceInput = document.querySelector('.form__input_item_place');
 
-const cardTemplate = document.querySelector('#card-template').content;
+const formValidatorProfile = new FormValidator(settings, formElement);
+const formValidatorPlace = new FormValidator(settings, formPlace);
+
 
 //закрытие попапа эскейпом
 function handlePopupEsc(event) {
@@ -30,11 +34,6 @@ function handlePopupEsc(event) {
     const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
-}
-
-//добавление лайка//
-const likedCard = (event) => {
-  event.target.closest('.card__like').classList.toggle('active');
 }
 
 //открытие попапов
@@ -53,11 +52,23 @@ function closePopup(popup) {
 profileEditButton.addEventListener('click', () => {
   popupNameInput.value = profileName.textContent;
   popupInfoInput.value = profileInfo.textContent;
+
   openPopup(popupEditProfile);
 });
 
+//Вставка инфы из попапа в профиль//
+function submitEditProfileForm(evt) {
+  evt.preventDefault();
+
+  profileName.textContent = popupNameInput.value;
+  profileInfo.textContent = popupInfoInput.value;
+
+  closePopup(popupEditProfile);
+};
+
 //кнопка открытия попапа добавления места
 profileAddButton.addEventListener('click', () => {
+  formValidatorPlace.resetValidation();
   openPopup(popupAddPlace);
 });
 
@@ -81,70 +92,46 @@ popupOverlay.forEach((popup) => {
   })
 });
 
-//Вставка инфы из попапа в профиль//
-function submitEditProfileForm(evt) {
-  evt.preventDefault();
 
-  profileName.textContent = popupNameInput.value;
-  profileInfo.textContent = popupInfoInput.value;
+//добавление карточки
+function addCard(item) {
+  const card = new Card(item, '#card-template', openImagePopup);
+  const cardElement = card.generateCard();
 
-  closePopup(popupEditProfile);
-};
-
-//работа с шаблоном//
-function createCard(cardLink, cardName) {
-  const card = cardTemplate.cloneNode(true);;
-  const cardImage = card.querySelector('.card__image');
-  const cardTitle = card.querySelector('.card__title');
-  cardImage.setAttribute('src', cardLink);
-  cardImage.setAttribute('alt', cardName);
-  cardTitle.textContent = cardName;
-
-  //лайк карточки
-  const likeBtn = card.querySelector('.card__like');
-  likeBtn.addEventListener('click', likedCard);
-
-  //удаление карточки
-  const deleteCardButton = card.querySelector('.card__delete');
-  deleteCardButton.addEventListener('click', () => {
-    deleteCardButton.closest('.card').remove()
-  }
-  );
-
-  //открытие попапа с картинкой//
-  cardImage.addEventListener('click', () => {
-    popupOpenedImage.src = cardImage.src;
-    popupOpenedImage.alt = cardImage.alt;
-    popupImageCaption.textContent = cardTitle.textContent;
-    openPopup(popupImage);
-  }
-  );
-  return card;
+  cardsItems.prepend(cardElement);
 }
 
-function addCard(card) {
-  cardsItems.prepend(card);
-};
-
-
-//добавление карточек из массива
-initialCards.forEach((initialCard) => {
-  const сards = createCard(initialCard.link, initialCard.name);
-  addCard(сards);
+initialCards.forEach((item) => {
+  addCard(item, cardsItems);
 });
 
-//инфа для новой карточки//
+
 function submitPlaceForm(e) {
   e.preventDefault();
 
-  const newCard = createCard(popupLinkInput.value, popupPlaceInput.value)
-  addCard(newCard);
+  const cardElement = {
+    name: popupPlaceInput.value,
+    link: popupLinkInput.value,
+  };
+
+  addCard(cardElement, cardsItems);
   closePopup(popupAddPlace);
-  formPlace.reset();
-};
+  e.target.reset();
+}
+
+//открытие попапа с картинкой
+function openImagePopup(name, link) {
+  popupOpenedImage.src = link;
+  popupOpenedImage.alt = name;
+  popupImageCaption.textContent = name;
+  openPopup(popupImage);
+}
 
 
-
-formPlace.addEventListener('submit', submitPlaceForm);
 formElement.addEventListener('submit', submitEditProfileForm);
+formPlace.addEventListener('submit', submitPlaceForm);
+
+
+formValidatorProfile.enableValidation();
+formValidatorPlace.enableValidation();
 
