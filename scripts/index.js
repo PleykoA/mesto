@@ -24,6 +24,7 @@ const popupImageCaption = document.querySelector('.popup__caption');
 const popupLinkInput = document.querySelector('.form__input_item_link');
 const popupPlaceInput = document.querySelector('.form__input_item_place');
 
+
 const formValidatorProfile = new FormValidator(settings, formElement);
 const formValidatorPlace = new FormValidator(settings, formPlace);
 
@@ -31,8 +32,7 @@ const formValidatorPlace = new FormValidator(settings, formPlace);
 //закрытие попапа эскейпом
 function handlePopupEsc(event) {
   if (event.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 
@@ -45,7 +45,7 @@ function openPopup(popup) {
 //закрытие попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.addEventListener('keydown', handlePopupEsc);
+  document.removeEventListener('keydown', handlePopupEsc);
 }
 
 //кнопка открытия попапа редактирования профиля
@@ -74,12 +74,18 @@ profileAddButton.addEventListener('click', () => {
 
 
 //закрытие попапов//
-const popupCloseBtns = document.querySelectorAll('.popup__close-button');
+const popups = document.querySelectorAll('.popup')
 
-popupCloseBtns.forEach((closeBtns) => {
-  const popup = closeBtns.closest('.popup');
-  closeBtns.addEventListener('click', () => closePopup(popup));
-});
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup)
+        }
+        if (evt.target.classList.contains('popup__close-button')) {
+          closePopup(popup)
+        }
+    })
+})
 
 //попап закроется кликом по бэкграунду
 const popupOverlay = document.querySelectorAll('.popup');
@@ -94,11 +100,15 @@ popupOverlay.forEach((popup) => {
 
 
 //добавление карточки
-function addCard(item) {
+function createCard(item) {
   const card = new Card(item, '#card-template', openImagePopup);
   const cardElement = card.generateCard();
 
-  cardsItems.prepend(cardElement);
+  return cardElement
+}
+
+function addCard(title, image){
+  cardsItems.prepend(createCard(title, image));
 }
 
 initialCards.forEach((item) => {

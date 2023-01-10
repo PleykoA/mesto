@@ -70,8 +70,7 @@ export class FormValidator {
 
 
   enableValidation() {
-    const formElement = document.querySelector(this._formSelector);
-    this._setEventListeners(formElement);
+    this._setEventListeners();
   };
 
 
