@@ -87,17 +87,6 @@ popups.forEach((popup) => {
     })
 })
 
-//попап закроется кликом по бэкграунду
-const popupOverlay = document.querySelectorAll('.popup');
-
-popupOverlay.forEach((popup) => {
-  popup.addEventListener('click', (e) => {
-    if (e.target === popup) {
-      closePopup(popup);
-    }
-  })
-});
-
 
 //добавление карточки
 function createCard(item) {
@@ -145,3 +134,6 @@ formPlace.addEventListener('submit', submitPlaceForm);
 formValidatorProfile.enableValidation();
 formValidatorPlace.enableValidation();
 
+
+
+//Большое спасибо за ревью и подробные комментарии! С:
