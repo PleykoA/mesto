@@ -1,139 +1,120 @@
 import { initialCards, settings } from './constants.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-
+import { Section } from './Section.js';
+import { PopupWithForm } from './PopupWithForm.js';
+import { PopupWithImage } from './PopupWithImage.js';
+import { UserInfo } from './UserInfo.js';
+//попапы
 const popupEditProfile = document.querySelector('.popup_edite');
 const popupAddPlace = document.querySelector('.popup_add');
-const popupImage = document.querySelector('.popup_image');
+const popupImg = document.querySelector('.popup_image');
 
+
+//кнопки добавления
 const profileEditButton = document.querySelector('.profile__edit-button');
-const profileName = document.querySelector('.profile__title');
-const profileInfo = document.querySelector('.profile__subtitle');
+const profileAddButton = document.querySelector('.profile__add-button');
 
+//формы
 const formElement = document.querySelector('.form_type_edit');
 const formPlace = document.querySelector('.form_edit_place');
+
+//инпуты
+/* const profileName = document.querySelector('.profile__title');
+const profileInfo = document.querySelector('.profile__subtitle'); */
 const popupNameInput = document.querySelector('.form__input_item_name');
 const popupInfoInput = document.querySelector('.form__input_item_job');
-const profileAddButton = document.querySelector('.profile__add-button');
+/* const popupLinkInput = document.querySelector('.form__input_item_link');
+const popupPlaceInput = document.querySelector('.form__input_item_place'); */
 
 const cardsItems = document.querySelector('.cards__item');
 
-const popupOpenedImage = document.querySelector('.popup__image');
-const popupImageCaption = document.querySelector('.popup__caption');
-
-const popupLinkInput = document.querySelector('.form__input_item_link');
-const popupPlaceInput = document.querySelector('.form__input_item_place');
-
-
-const formValidatorProfile = new FormValidator(settings, formElement);
-const formValidatorPlace = new FormValidator(settings, formPlace);
-
-
-//закрытие попапа эскейпом
-function handlePopupEsc(event) {
-  if (event.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
-
-//открытие попапов
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handlePopupEsc);
-}
-
-//закрытие попапа
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handlePopupEsc);
-}
-
-//кнопка открытия попапа редактирования профиля
-profileEditButton.addEventListener('click', () => {
-  popupNameInput.value = profileName.textContent;
-  popupInfoInput.value = profileInfo.textContent;
-
-  openPopup(popupEditProfile);
+const userInfo = new UserInfo({
+  profileName: '.profile__title',
+  profileInfo: '.profile__subtitle'
 });
 
-//Вставка инфы из попапа в профиль//
-function submitEditProfileForm(evt) {
-  evt.preventDefault();
+const popupImage = new PopupWithImage(popupImg);
 
-  profileName.textContent = popupNameInput.value;
-  profileInfo.textContent = popupInfoInput.value;
-
-  closePopup(popupEditProfile);
+//открытие попапа с картинкой
+function handleCardClick(name, link) {
+  popupImage.open(name, link);
 };
-
-//кнопка открытия попапа добавления места
-profileAddButton.addEventListener('click', () => {
-  formValidatorPlace.resetValidation();
-  openPopup(popupAddPlace);
-});
-
-
-//закрытие попапов//
-const popups = document.querySelectorAll('.popup')
-
-popups.forEach((popup) => {
-    popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_opened')) {
-            closePopup(popup)
-        }
-        if (evt.target.classList.contains('popup__close-button')) {
-          closePopup(popup)
-        }
-    })
-})
-
 
 //добавление карточки
 function createCard(item) {
-  const card = new Card(item, '#card-template', openImagePopup);
+  const card = new Card(item, '#card-template', handleCardClick);
   const cardElement = card.generateCard();
 
   return cardElement
 }
 
-function addCard(title, image){
-  cardsItems.prepend(createCard(title, image));
-}
+function addCard(card) {
+  section.addItem(card);
+};
 
-initialCards.forEach((item) => {
-  addCard(item, cardsItems);
+const section = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    addCard(createCard(item));
+  }
+},
+  cardsItems
+);
+
+//попап профиля
+const popupProfile = new PopupWithForm({
+  handleFormSubmit: (data) => {
+    userInfo.setUserInfo(data);
+    formValidatorProfile.resetValidation();
+  }
+},
+  popupEditProfile
+);
+
+profileEditButton.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  popupNameInput.value = userInfo.getUserInfo().name;
+  popupInfoInput.value = userInfo.getUserInfo().info;
+
+  formValidatorProfile.resetValidation();
+  popupProfile.open();
 });
 
 
-function submitPlaceForm(e) {
-  e.preventDefault();
+//попап места
+const popupPlace = new PopupWithForm({
+  handleFormSubmit: (item) => {
+    const newCard = {
+      name: item.place,
+      link: item.link,
+    };
+    addCard(createCard(newCard));
+  }
+},
+  popupAddPlace
+);
 
-  const cardElement = {
-    name: popupPlaceInput.value,
-    link: popupLinkInput.value,
-  };
-
-  addCard(cardElement, cardsItems);
-  closePopup(popupAddPlace);
-  e.target.reset();
-}
-
-//открытие попапа с картинкой
-function openImagePopup(name, link) {
-  popupOpenedImage.src = link;
-  popupOpenedImage.alt = name;
-  popupImageCaption.textContent = name;
-  openPopup(popupImage);
-}
+profileAddButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  formValidatorPlace.resetValidation();
+  popupPlace.open();
+});
 
 
-formElement.addEventListener('submit', submitEditProfileForm);
-formPlace.addEventListener('submit', submitPlaceForm);
-
-
+//валидация
+const formValidatorProfile = new FormValidator(settings, formElement);
+const formValidatorPlace = new FormValidator(settings, formPlace);
 formValidatorProfile.enableValidation();
 formValidatorPlace.enableValidation();
 
+//слушатели
+popupImage.setEventListeners();
+popupPlace.setEventListeners();
+popupProfile.setEventListeners();
 
 
-//Большое спасибо за ревью и подробные комментарии! С:
+section.renderItems();
+
+

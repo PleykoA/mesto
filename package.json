@@ -1,0 +1,22 @@
+{
+  "name": "yandex_praktikum",
+  "version": "1.0.0",
+  "description": "* CSS\r * HTML\r * GRID\r * FLEX\r * Nested файловая структура по БЭМ\r * JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PleykoA/mesto.git"
+  },
+  "author": "Asya Pleyko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PleykoA/mesto/issues"
+  },
+  "homepage": "https://github.com/PleykoA/mesto#readme",
+  "devDependencies": {
+    "webpack": "^5.75.0"
+  }
+}
