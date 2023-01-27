@@ -1,15 +1,15 @@
-import { initialCards, settings } from './constants.js';
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import { Section } from './Section.js';
-import { PopupWithForm } from './PopupWithForm.js';
-import { PopupWithImage } from './PopupWithImage.js';
-import { UserInfo } from './UserInfo.js';
+import './index.css';
+import { initialCards, settings } from '../scripts/constants.js';
+import { Card } from '../scripts/Card.js';
+import { FormValidator } from '../scripts/FormValidator.js';
+import { Section } from '../scripts/Section.js';
+import { PopupWithForm } from '../scripts/PopupWithForm.js';
+import { PopupWithImage } from '../scripts/PopupWithImage.js';
+import { UserInfo } from '../scripts/UserInfo.js';
 //попапы
 const popupEditProfile = document.querySelector('.popup_edite');
 const popupAddPlace = document.querySelector('.popup_add');
 const popupImg = document.querySelector('.popup_image');
-
 
 //кнопки добавления
 const profileEditButton = document.querySelector('.profile__edit-button');
@@ -81,7 +81,6 @@ profileEditButton.addEventListener('click', (e) => {
   formValidatorProfile.resetValidation();
   popupProfile.open();
 });
-
 
 //попап места
 const popupPlace = new PopupWithForm({
