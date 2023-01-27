@@ -1,11 +1,12 @@
-import './index.css';
-import { initialCards, settings } from '../scripts/constants.js';
-import { Card } from '../scripts/Card.js';
-import { FormValidator } from '../scripts/FormValidator.js';
-import { Section } from '../scripts/Section.js';
-import { PopupWithForm } from '../scripts/PopupWithForm.js';
-import { PopupWithImage } from '../scripts/PopupWithImage.js';
-import { UserInfo } from '../scripts/UserInfo.js';
+import './pages/index.css';
+import { initialCards, settings } from './components/constants.js';
+import { Card } from './components/Card.js';
+import { FormValidator } from './components/FormValidator.js';
+import { Section } from './components/Section.js';
+import { PopupWithForm } from './components/PopupWithForm.js';
+import { PopupWithImage } from './components/PopupWithImage.js';
+import { UserInfo } from './components/UserInfo.js';
+
 //попапы
 const popupEditProfile = document.querySelector('.popup_edite');
 const popupAddPlace = document.querySelector('.popup_add');
@@ -59,18 +60,16 @@ const section = new Section({
     addCard(createCard(item));
   }
 },
-  cardsItems
-);
+  cardsItems);
 
 //попап профиля
 const popupProfile = new PopupWithForm({
-  handleFormSubmit: (data) => {
+  submit: (data) => {
     userInfo.setUserInfo(data);
     formValidatorProfile.resetValidation();
   }
 },
-  popupEditProfile
-);
+  popupEditProfile);
 
 profileEditButton.addEventListener('click', (e) => {
   e.preventDefault();
@@ -84,7 +83,7 @@ profileEditButton.addEventListener('click', (e) => {
 
 //попап места
 const popupPlace = new PopupWithForm({
-  handleFormSubmit: (item) => {
+  submit: (item) => {
     const newCard = {
       name: item.place,
       link: item.link,
@@ -92,15 +91,13 @@ const popupPlace = new PopupWithForm({
     addCard(createCard(newCard));
   }
 },
-  popupAddPlace
-);
+  popupAddPlace);
 
 profileAddButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   formValidatorPlace.resetValidation();
   popupPlace.open();
 });
-
 
 //валидация
 const formValidatorProfile = new FormValidator(settings, formElement);
