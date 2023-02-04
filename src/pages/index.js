@@ -7,6 +7,10 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 
+//попапы
+const popupEditProfile = document.querySelector('.popup_edite');
+const popupAddPlace = document.querySelector('.popup_add');
+const popupImg = document.querySelector('.popup_image');
 
 //кнопки добавления
 const profileEditButton = document.querySelector('.profile__edit-button');
@@ -31,7 +35,7 @@ const userInfo = new UserInfo({
   profileInfo: '.profile__subtitle'
 });
 
-const popupImage = new PopupWithImage('.popup_image');
+const popupImage = new PopupWithImage(popupImg);
 
 //открытие попапа с картинкой
 function handleCardClick(name, link) {
@@ -65,7 +69,7 @@ const popupProfile = new PopupWithForm({
     formValidatorProfile.resetValidation();
   }
 },
-  '.popup_edite');
+  popupEditProfile);
 
 profileEditButton.addEventListener('click', (e) => {
   e.preventDefault();
@@ -87,7 +91,7 @@ const popupPlace = new PopupWithForm({
     addCard(createCard(newCard));
   }
 },
-'.popup_add');
+  popupAddPlace);
 
 profileAddButton.addEventListener('click', (evt) => {
   evt.preventDefault();

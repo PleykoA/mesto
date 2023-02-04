@@ -31,4 +31,3 @@ export class Popup {
     });
   }
 }
-
