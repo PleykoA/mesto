@@ -34,25 +34,43 @@ export class Card {
     this._likeButton = this._element.querySelector('.card__like');
     this._deleteButton = this._element.querySelector('.card__delete');
     this._likeCount = this._element.querySelector('.card__like-count');
+    if (!this.likedCard()) {
+      this._likeButton.classList.remove('active');
+    } else {
+      this._likeButton.classList.add('active');
+    }
 
     this._cardImage.src = this._image;
     this._cardImage.alt = this._text;
-    this._likeCount.textContent = this._likes.length;
+    this._likeCount.textContent = this._likesLength;
 
-    this._toggleCardLike()
     this._setEventListeners();
+
     return this._element;
   }
 
 
+  likedCard() {
+    return !!this._likes.find(like => like._id === this._userId)
+  }
 
-  putCardLikeButton() {
+  toggleLike() {
+    this._likeButton.classList.toggle('active');
+  }
+
+  setLikes(likes) {
+    this._likes = likes
+    this._likesLength = likes.length;
+    this._likeCount.textContent = this._likesLength;
+  }
+
+/*   putCardLikeButton() {
     this._likeButton.classList.add('active');
 
   }
 
   dislikeCardLikeButton() {
-    this._likeButton.classList.add('active');
+    this._likeButton.classList.remove('active');
 
   }
 
@@ -66,7 +84,7 @@ export class Card {
 
   handleCardLikeCounter(data) {
     this._likeCount.textContent = data.length;
-  }
+  } */
 
   deleteCard() {
     this._element.remove();
@@ -74,18 +92,18 @@ export class Card {
   }
   _setEventListeners() {
     this._cardImage.addEventListener('click', () => {
-      this._handleCardClick(this._text, this._link);
+      this._handleCardClick(this._text, this._image);
     });
 
     this._likeButton.addEventListener('click', () => {
-      this._handleLikeClick(this._id)
+      this._handleLikeClick(this)
     });
 
     if (this._userId !== this._ownerId) {
       this._deleteButton.remove();
     } else {
       this._deleteButton.addEventListener('click', () => {
-        this._handleCardDelete(this._id);
+        this._handleCardDelete(this);
       });
     }
   }

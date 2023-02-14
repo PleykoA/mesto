@@ -26,10 +26,10 @@ export class Api {
   }
 
   addCard(card) {
-    return fetch(`${this._baseUr}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       body: JSON.stringify({
-        name: card.place,
+        name: card.name,
         link: card.link
       }),
       headers: this._headers
