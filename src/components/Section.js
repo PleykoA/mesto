@@ -5,15 +5,13 @@ export class Section {
     this._container = container;
   }
 
-
   addItem(element) {
     this._container.prepend(element);
   }
 
-
   renderItems(items) {
-    items.forEach((el) => {
-      this.addItem(this._renderer(el))
+    items.forEach((item) => {
+      this.addItem(this._renderer(item))
     })
   }
 }

@@ -1,4 +1,5 @@
 export class Api {
+
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
@@ -57,7 +58,7 @@ export class Api {
   }
 
 
-  deleteCardLike(id) {
+  removeLikeCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers
@@ -69,24 +70,24 @@ export class Api {
   editProfile(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
+      headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about
-      }),
-      headers: this._headers
+      })
     })
       .then(res =>
         this._response(res));
   }
 
 
-  updateAvatar(data) {
+  editAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar
-      }),
-      headers: this._headers
+      })
     })
       .then(res =>
         this._response(res));

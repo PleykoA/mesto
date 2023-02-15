@@ -7,14 +7,15 @@ export class PopupWithConfirmation extends Popup {
     this._popupForm = this._popup.querySelector('.form');
   }
 
-  sendConfirmation(callback) {
-    this._submit = callback;
+  setCallback(callback) {
+    this._callback = callback;
   }
+
   setEventListeners() {
     super.setEventListeners()
     this._popupForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._submit();
+      this._callback();
     })
   }
 }

@@ -63,3 +63,4 @@ export const popupInfoInput = document.querySelector('.form__input_item_job');
 const popupPlaceInput = document.querySelector('.form__input_item_place'); */
 
 export const cardsItems = document.querySelector('.cards__item');
+export const avatarInput = document.querySelector('.form__input_link_avatar');
