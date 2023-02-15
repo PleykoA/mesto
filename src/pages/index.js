@@ -1,5 +1,5 @@
 import './index.css';
-import { configApi, settings, profileEditButton, profileAddButton, profileEditAvatarButton, formElement, formPlace, formAvatar, popupNameInput, popupInfoInput, cardsItems, avatarInput} from '../utils/constants.js';
+import { configApi, settings, profileEditButton, profileAddButton, profileEditAvatarButton, formElement, formPlace, formAvatar, popupNameInput, popupInfoInput, cardsItems, avatarInput } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
@@ -36,8 +36,28 @@ function createCard(item) {
     {
       handleCardClick,
       handleDeleteCard,
-      handleLikeCard
-    })
+      handleLikeCard: (card) => {
+        if (!card.likedCard()) {
+          return api
+            .likeCard(card._id)
+            .then((res) => {
+              card.toggleLikeCard();
+              card.setLikesCount(res.likes);
+              console.log(res.likes);
+            })
+            .catch((err) => console.log(err));
+        } else {
+          return api
+            .removeLikeCard(card._id)
+            .then((res) => {
+              card.toggleLikeCard()
+              card.setLikesCount(res.likes)
+            })
+            .catch((err) => { console.log(err) })
+        }
+      }
+    }
+  )
   const cardElement = card.generateCard();
 
   return cardElement
@@ -47,18 +67,6 @@ const section = new Section({
   renderer: (item) => createCard(item)
 }, cardsItems);
 
-
-//лайк карточки
-function handleLikeCard(card) {
-  return api
-    .likeCard(card._id)
-    .then((res) => {
-      card.toggleLikeCard();
-      card.setLikes(res.likes);
-      console.log(res.likes);
-    })
-    .catch((err) => console.log(err));
-}
 
 //открытие попапа с картинкой
 function handleCardClick(text, image) {
