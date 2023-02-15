@@ -99,8 +99,7 @@ const userInfo = new UserInfo({
 //попап аватара
 const popupAvatar = new PopupWithForm({
   submit: (info) => {
-    popupAvatar.isLoading(true)
-    api
+    return api
       .editAvatar(info)
       .then((res) => {
         userInfo.setUserAvatar(res.avatar);
@@ -109,26 +108,20 @@ const popupAvatar = new PopupWithForm({
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {
-        popupAvatar.isLoading(false)
-      })
   }
 }, '.popup_avatar');
 
 //попап профиля
 const popupProfile = new PopupWithForm({
   submit: (info) => {
-    popupProfile.isLoading(true)
-    api.editProfile(info)
+
+    return api.editProfile(info)
       .then((res) => {
         userInfo.setUserInfo(res.name, res.about);
         popupProfile.close();
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        popupProfile.isLoading(false)
       })
   }
 }, '.popup_edite');
@@ -140,8 +133,7 @@ const popupPlace = new PopupWithForm({
       name: info.place,
       link: info.link,
     };
-    popupPlace.isLoading(true)
-    api
+    return api
       .addCard(card)
       .then((res) => {
         section.addItem(createCard(res));
@@ -150,9 +142,6 @@ const popupPlace = new PopupWithForm({
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {
-        popupPlace.isLoading(false)
-      })
   }
 }, '.popup_add');
 
@@ -160,8 +149,9 @@ const popupPlace = new PopupWithForm({
 profileEditButton.addEventListener('click', (e) => {
   e.preventDefault();
 
-  popupNameInput.value = userInfo.getUserInfo().name;
-  popupInfoInput.value = userInfo.getUserInfo().info;
+ const inputInfo = userInfo.getUserInfo();
+  popupNameInput.value = inputInfo.name;
+  popupInfoInput.value = inputInfo.info;
 
   formValidatorProfile.resetValidation();
   popupProfile.open();

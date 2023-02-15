@@ -19,21 +19,22 @@ export class PopupWithForm extends Popup {
     return inputs;
   }
 
-  isLoading(loading) {
-    if (loading) {
-      this._submitBtn.textContent = 'Сохранение...'
-    } else {
-      this._submitBtn.textContent = 'Сохранение'
-    }
-  }
-
   setEventListeners() {
     super.setEventListeners();
+
     this._popupForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._submit(this._getInputValues());
-    })
+
+      const initialText = this._submitBtn.textContent;
+      this._submitBtn.textContent = 'Сохранение...';
+      this._submit(this._getInputValues())
+        .then(() => this.close())
+        .finally(() => {
+          this._submitBtn.textContent = initialText;
+        })
+    });
   }
+
 
   close() {
     super.close();
