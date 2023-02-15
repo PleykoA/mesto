@@ -98,10 +98,10 @@ const userInfo = new UserInfo({
 
 //попап аватара
 const popupAvatar = new PopupWithForm({
-  submit: (data) => {
+  submit: (info) => {
     popupAvatar.isLoading(true)
     api
-      .editAvatar(data)
+      .editAvatar(info)
       .then((res) => {
         userInfo.setUserAvatar(res.avatar);
         popupAvatar.close();
@@ -117,9 +117,9 @@ const popupAvatar = new PopupWithForm({
 
 //попап профиля
 const popupProfile = new PopupWithForm({
-  submit: (inputs) => {
+  submit: (info) => {
     popupProfile.isLoading(true)
-    api.editProfile(inputs)
+    api.editProfile(info)
       .then((res) => {
         userInfo.setUserInfo(res.name, res.about);
         popupProfile.close();
@@ -135,10 +135,10 @@ const popupProfile = new PopupWithForm({
 
 //попап изменения места(добавления карточки)
 const popupPlace = new PopupWithForm({
-  submit: (data) => {
+  submit: (info) => {
     const card = {
-      name: data.place,
-      link: data.link,
+      name: info.place,
+      link: info.link,
     };
     popupPlace.isLoading(true)
     api
