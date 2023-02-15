@@ -136,13 +136,13 @@ const popupProfile = new PopupWithForm({
 //попап изменения места(добавления карточки)
 const popupPlace = new PopupWithForm({
   submit: (data) => {
-    const itemCard = {
+    const card = {
       name: data.place,
       link: data.link,
     };
     popupPlace.isLoading(true)
     api
-      .addCard(itemCard)
+      .addCard(card)
       .then((res) => {
         section.addItem(createCard(res));
         popupPlace.close();
