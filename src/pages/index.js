@@ -82,7 +82,6 @@ function handleDeleteCard(card) {
       .deleteCard(card._id)
       .then(() => {
         card.deleteCard();
-        popupDelete.close();
       })
       .catch((err) => {
         console.log(err);
@@ -103,7 +102,6 @@ const popupAvatar = new PopupWithForm({
       .editAvatar(info)
       .then((res) => {
         userInfo.setUserAvatar(res.avatar);
-        popupAvatar.close();
       })
       .catch((err) => {
         console.log(err);
@@ -118,7 +116,6 @@ const popupProfile = new PopupWithForm({
     return api.editProfile(info)
       .then((res) => {
         userInfo.setUserInfo(res.name, res.about);
-        popupProfile.close();
       })
       .catch((err) => {
         console.log(err);
@@ -137,7 +134,6 @@ const popupPlace = new PopupWithForm({
       .addCard(card)
       .then((res) => {
         section.addItem(createCard(res));
-        popupPlace.close();
       })
       .catch((err) => {
         console.log(err);
